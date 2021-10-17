@@ -379,6 +379,26 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    Examples
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#handling-game-events" class="md-nav__link">
+    Handling game events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -446,21 +466,6 @@
           
         </ul>
       </nav>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../examples/" class="md-nav__link">
-        Examples
-      </a>
     </li>
   
 
@@ -557,6 +562,35 @@
 <span class="o">}</span>
 </code></pre></div>
 </td></tr></table>
+<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
+<h3 id="handling-game-events">Handling game events<a class="headerlink" href="#handling-game-events" title="Permanent link">&para;</a></h3>
+<p>First of all, start by making a simple service class, like this:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nd">@Service</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExampleService</span> <span class="p">{</span>
+    <span class="c1">// Service class</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+Then create a new public method that returns void, has an event parameter and annotate it with <code>@OnEvent</code>. It is possible to specify the priority field and the ignoreCancelled field in the annotation.
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nd">@Service</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExampleService</span> <span class="p">{</span>
+    <span class="nd">@OnEvent</span><span class="p">(</span><span class="n">priority</span> <span class="o">=</span> <span class="n">EventPriority</span><span class="p">.</span><span class="na">HIGHEST</span><span class="p">,</span> <span class="n">ignoreCancelled</span> <span class="o">=</span> <span class="kc">true</span><span class="p">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onPlayerInteract</span><span class="p">(</span><span class="n">SPlayerInteractEvent</span> <span class="n">event</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Event handling logic</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+Then register the service class in the <code>@Init</code> annotation on the main plugin class, and you're done!</p>
                 
                   
                     
@@ -565,7 +599,7 @@
 <div class="md-source-date">
   <small>
     
-      Last update: 2021-10-16
+      Last update: 2021-10-17
     
   </small>
 </div>

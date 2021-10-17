@@ -435,6 +435,26 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    Examples
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-your-first-npc" class="md-nav__link">
+    Creating your first NPC
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -446,21 +466,6 @@
           
         </ul>
       </nav>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../examples/" class="md-nav__link">
-        Examples
-      </a>
     </li>
   
 
@@ -558,6 +563,53 @@
 <span class="o">}</span>
 </code></pre></div>
 </td></tr></table>
+<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
+<h3 id="creating-your-first-npc">Creating your first NPC<a class="headerlink" href="#creating-your-first-npc" title="Permanent link">&para;</a></h3>
+<p>Start by spawning the NPC on a specified location, like this:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">final</span> <span class="n">NPC</span> <span class="n">npc</span> <span class="o">=</span> <span class="n">NPC</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">yourLocation</span><span class="p">);</span>
+</code></pre></div>
+</td></tr></table>
+Now let's set a nice skin for the NPC. You will need the skin value and the skin signature, both of these you can get from Mojang's session server. I'll use Misat's skin in this example.
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">// https://sessionserver.mojang.com/session/minecraft/profile/&lt;player uuid&gt;?unsigned=false</span>
+
+<span class="c1">// misat&#39;s player profile</span>
+<span class="c1">// https://sessionserver.mojang.com/session/minecraft/profile/4ffbed72-702f-4fea-abde-22c5e1078abb?unsigned=false</span>
+<span class="kd">final</span> <span class="n">NPC</span> <span class="n">npc</span> <span class="o">=</span> <span class="n">NPC</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">yourLocation</span><span class="p">)</span>
+        <span class="p">.</span><span class="na">setSkin</span><span class="p">(</span>
+            <span class="k">new</span> <span class="n">NPCSkin</span><span class="p">(</span>
+                <span class="c1">// value</span>
+                <span class="s">&quot;ewogICJ0aW1lc3RhbXAiIDogMTYzNDQ2MDM3ODUxNywKICAicHJvZmlsZUlkIiA6ICI0ZmZiZWQ3MjcwMmY0ZmVhYWJkZTIyYzVlMTA3OGFiYiIsCiAgInByb2ZpbGVOYW1lIiA6ICJNaXNhdDExIiwKICAic2lnbmF0dXJlUmVxdWlyZWQiIDogdHJ1ZSwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlLzRlYTFmMWY1NmQ4NThhMTEwMjNlYWQ3NjhkMGE4NWQ2MDEzM2E3MDBkMzYyN2U1YjA1YzAwZmUzYmJmZWU5YzAiCiAgICB9LAogICAgIkNBUEUiIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlLzIzNDBjMGUwM2RkMjRhMTFiMTVhOGIzM2MyYTdlOWUzMmFiYjIwNTFiMjQ4MWQwYmE3ZGVmZDYzNWNhN2E5MzMiCiAgICB9CiAgfQp9&quot;</span><span class="p">,</span>
+                <span class="c1">// signature</span>
+                <span class="s">&quot;gaXuCCGyQ6465FS9kC0ylODMSV9aobFTqZuHsJlJhD1JbRQgYXzo5NdCHkKhu1GetmcDwueFYDRCN/KEMGCe79GOFgycdeOBcAxdiXRZg7mH2o8QR/5sIaD7yhrUKe+2Ji866j2gkPF7n4qWRSR5N+n66DxkO6S+/cb6J5CGYDUGZ6ywYKI2NkSg5Qn0O3bIvTbybl5n+y9Fcal4qyMOMBEpUSeNfkcmOn7SWawvXFY6o/1stHwVdNthF6dilsJSuNcMTnvsZ0vfFv9nzjf/Z1QF6aNF+BmucgTKT2idEOrh4hXIcRS+wrrC/jFGVXxcsSAkCS9cx7T5Nw2n5RNQMFFvJDkrHRLewagjD09J7C6E9LFBdWNWCxyWPueMN0kWdufsaFwAWCaOAdX2bh4E93Z2Y5dap+8gRiJAQBh4Z0QPuB97WpN2aptSBC6+q3jgmOd1LwefdHIm4sPktewdxTDewRULVY3ERTfxZB8WmX3hDHmHIlGufOhrDE7KI44BmnveQmRDFzMea+XUhQp3VXgnCLPf7W7rQ3+rluj1K9cAds/KPQIv0OjM+xlhZVRHWmcuISv7nEzoImblUc4WcUmhr7YxfZGrXLejc58/Dro95XK+AmNYmjcnZZry4yLmZEuba5UIYHEd9fdRSPwi/h3PyOBHUo2JMvc+TsgRaUU=&quot;</span>
+            <span class="p">)</span>
+        <span class="p">);</span>
+</code></pre></div>
+</td></tr></table>
+I think that NPC's looking into your soul are not creepy at all, so let's make the NPC look at players and let's give it a name.
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">final</span> <span class="n">NPC</span> <span class="n">npc</span> <span class="o">=</span> <span class="p">...;</span>
+<span class="c1">// you can totally do this in the npc builder, i chose not to, because i didn&#39;t want to copy the huge block of skin values</span>
+<span class="n">npc</span><span class="p">.</span><span class="na">setShouldLookAtPlayer</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="c1">// requires a List&lt;Component&gt; to allow for multiline names</span>
+<span class="n">npc</span><span class="p">.</span><span class="na">setDisplayName</span><span class="p">(</span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="n">Component</span><span class="p">.</span><span class="na">text</span><span class="p">(</span><span class="s">&quot;Misat11&quot;</span><span class="p">)));</span>
+</code></pre></div>
+</td></tr></table>
+And you've made yourself a fresh new NPC!</p>
                 
                   
                     
@@ -566,7 +618,7 @@
 <div class="md-source-date">
   <small>
     
-      Last update: 2021-10-16
+      Last update: 2021-10-17
     
   </small>
 </div>
@@ -609,21 +661,6 @@
           </div>
         </a>
       
-      
-        
-        <a href="../../examples/" class="md-footer__link md-footer__link--next" aria-label="Next: Examples" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              Examples
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-          </div>
-        </a>
       
     </nav>
   

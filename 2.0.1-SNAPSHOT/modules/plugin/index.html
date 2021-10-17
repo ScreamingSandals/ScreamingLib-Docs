@@ -393,6 +393,39 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    Examples
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#making-your-first-plugin" class="md-nav__link">
+    Making your first plugin
+  </a>
+  
+    <nav class="md-nav" aria-label="Making your first plugin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-the-main-plugin-class" class="md-nav__link">
+    Creating the main plugin class
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -446,21 +479,6 @@
           
         </ul>
       </nav>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../examples/" class="md-nav__link">
-        Examples
-      </a>
     </li>
   
 
@@ -558,6 +576,166 @@
 <span class="o">}</span>
 </code></pre></div>
 </td></tr></table>
+<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
+<h3 id="making-your-first-plugin">Making your first plugin<a class="headerlink" href="#making-your-first-plugin" title="Permanent link">&para;</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Adventure</p>
+<p>If you're experiencing errors related to <a href="https://github.com/KyoriPowered/adventure">Adventure</a>, make sure to relocate the net.kyori.adventure package!</p>
+</div>
+<h4 id="creating-the-main-plugin-class">Creating the main plugin class<a class="headerlink" href="#creating-the-main-plugin-class" title="Permanent link">&para;</a></h4>
+<p>Start with extending the PluginContainer class, like this:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExamplePlugin</span> <span class="kd">extends</span> <span class="n">PluginContainer</span> <span class="p">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">load</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// Plugin load logic</span>
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">enable</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// Plugin enable logic</span>
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">disable</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// Plugin disable logic</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+After that, add the <code>@Plugin</code> and <code>@Init</code> (only if you use SLib services) annotations.
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nd">@Plugin</span><span class="p">(</span>
+        <span class="n">id</span> <span class="o">=</span> <span class="s">&quot;ExamplePlugin&quot;</span><span class="p">,</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;ExamplePlugin&quot;</span><span class="p">,</span>
+        <span class="n">authors</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;ScreamingSandals&quot;</span><span class="p">},</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="s">&quot;0.0.1-SNAPSHOT&quot;</span>
+<span class="p">)</span>
+<span class="nd">@Init</span><span class="p">(</span><span class="n">services</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">ExampleService</span><span class="p">.</span><span class="na">class</span>
+<span class="p">})</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExamplePlugin</span> <span class="kd">extends</span> <span class="n">PluginContainer</span> <span class="p">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">load</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// Plugin load logic</span>
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">enable</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// Plugin enable logic</span>
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">disable</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// Plugin disable logic</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+If you want to depend on some plugin(s), you can add the <code>@PluginDependencies</code> annotation.
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nd">@Plugin</span><span class="p">(</span>
+        <span class="n">id</span> <span class="o">=</span> <span class="s">&quot;ExamplePlugin&quot;</span><span class="p">,</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;ExamplePlugin&quot;</span><span class="p">,</span>
+        <span class="n">authors</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;ScreamingSandals&quot;</span><span class="p">},</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="s">&quot;0.0.1-SNAPSHOT&quot;</span>
+<span class="p">)</span>
+<span class="nd">@PluginDependencies</span><span class="p">(</span><span class="n">platform</span> <span class="o">=</span> <span class="n">PlatformType</span><span class="p">.</span><span class="na">BUKKIT</span><span class="p">,</span> <span class="n">dependencies</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&quot;DependencyPlugin&quot;</span>
+<span class="p">},</span> <span class="n">softDependencies</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&quot;SoftDependencyPlugin&quot;</span>
+<span class="p">},</span> <span class="n">loadBefore</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&quot;LoadBeforePlugin&quot;</span>
+<span class="p">})</span>
+<span class="nd">@Init</span><span class="p">(</span><span class="n">services</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">ExampleService</span><span class="p">.</span><span class="na">class</span>
+<span class="p">})</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExamplePlugin</span> <span class="kd">extends</span> <span class="n">PluginContainer</span> <span class="p">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">load</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// Plugin load logic</span>
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">enable</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// Plugin enable logic</span>
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">disable</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// Plugin disable logic</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+And that's it!</p>
                 
                   
                     
@@ -566,7 +744,7 @@
 <div class="md-source-date">
   <small>
     
-      Last update: 2021-10-16
+      Last update: 2021-10-17
     
   </small>
 </div>
