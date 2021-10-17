@@ -373,6 +373,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#holders" class="md-nav__link">
+    Holders
+  </a>
+  
+    <nav class="md-nav" aria-label="Holders">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comparing" class="md-nav__link">
+    Comparing
+  </a>
+  
+    <nav class="md-nav" aria-label="Comparing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#blocktypeholderitemtypeholder" class="md-nav__link">
+    BlockTypeHolder/ItemTypeHolder
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#services" class="md-nav__link">
     Services
   </a>
@@ -384,6 +417,60 @@
   <a href="#annotations" class="md-nav__link">
     Annotations
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    Examples
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#iterating-over-online-players" class="md-nav__link">
+    Iterating over online players
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retrieving-a-player" class="md-nav__link">
+    Retrieving a player
+  </a>
+  
+    <nav class="md-nav" aria-label="Retrieving a player">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#converting-a-platform-player-to-playerwrapper" class="md-nav__link">
+    Converting a platform player to PlayerWrapper
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#converting-a-uuid-to-offlineplayerwrapper" class="md-nav__link">
+    Converting a UUID to OfflinePlayerWrapper
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#converting-a-name-to-playerwrapper" class="md-nav__link">
+    Converting a name to PlayerWrapper
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -741,6 +828,29 @@
 </tr>
 </tbody>
 </table>
+<h2 id="holders">Holders<a class="headerlink" href="#holders" title="Permanent link">&para;</a></h2>
+<p>ScreamingLib makes use of so-called Holders, platform unopinionated data holding classes.  </p>
+<p>Holders make use of Minecraft namespaced keys to stay platform independent.
+A very useful resource for getting Minecraft namespaced keys is Articdive's <a href="https://github.com/Articdive/ArticData">ArticData</a> repository.</p>
+<h3 id="comparing">Comparing<a class="headerlink" href="#comparing" title="Permanent link">&para;</a></h3>
+<p>You can compare a holder with the <code>&lt;Anything&gt;Holder#is(Object)</code> method.</p>
+<h4 id="blocktypeholderitemtypeholder">BlockTypeHolder/ItemTypeHolder<a class="headerlink" href="#blocktypeholderitemtypeholder" title="Permanent link">&para;</a></h4>
+<p>For example, I'm going to check if the material is stone, air or something else.
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="p">(</span><span class="n">holder</span><span class="p">.</span><span class="na">is</span><span class="p">(</span><span class="s">&quot;minecraft:stone&quot;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">PlayerMapper</span><span class="p">.</span><span class="na">getConsoleSender</span><span class="p">().</span><span class="na">sendMessage</span><span class="p">(</span><span class="s">&quot;Holder is stone!&quot;</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">holder</span><span class="p">.</span><span class="na">isAir</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">PlayerMapper</span><span class="p">.</span><span class="na">getConsoleSender</span><span class="p">().</span><span class="na">sendMessage</span><span class="p">(</span><span class="s">&quot;Holder is air/empty!&quot;</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">PlayerMapper</span><span class="p">.</span><span class="na">getConsoleSender</span><span class="p">().</span><span class="na">sendMessage</span><span class="p">(</span><span class="s">&quot;Holder is &quot;</span> <span class="o">+</span> <span class="n">holder</span><span class="p">.</span><span class="na">platformName</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot;!&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table></p>
 <h2 id="services">Services<a class="headerlink" href="#services" title="Permanent link">&para;</a></h2>
 <p>Services are classes with the <code>@Service</code> annotation, specified in the <code>@Init</code> annotation on the main plugin class. They are initialized when the plugin starts to load.
 It is possible to retrieve the service class instances with the ServiceManager class (<code>ServiceManager#get(Class&lt;?&gt;)</code>).  </p>
@@ -796,6 +906,54 @@ It is possible to retrieve the service class instances with the ServiceManager c
 <li><code>@OnDisable</code> - Marks the annotated method to run after the service class is being disabled (plugin is disabling).</li>
 <li><code>@Init(platforms = {}, services = {})</code> (plugin class only) - Defines service classes that should be initialized when the plugin is loading (order sensitive). In the <code>platforms</code> field, you can specify platforms that the service classes in the annotation will be initialized on (array of <code>PlatformType</code>, can be left out).</li>
 </ul>
+<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
+<h3 id="iterating-over-online-players">Iterating over online players<a class="headerlink" href="#iterating-over-online-players" title="Permanent link">&para;</a></h3>
+<p>If you want to iterate over all online players and compute something for each one, utilize the <code>List&lt;PlayerWrapper&gt; Server#getConnectedPlayers()</code> method.
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">// for loop</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">final</span> <span class="n">PlayerWrapper</span> <span class="n">player</span> <span class="p">:</span> <span class="n">Server</span><span class="p">.</span><span class="na">getConnectedPlayers</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">player</span><span class="p">.</span><span class="na">sendMessage</span><span class="p">(</span><span class="s">&quot;Hello!&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// Iterable#forEach()</span>
+<span class="n">Server</span><span class="p">.</span><span class="na">getConnectedPlayers</span><span class="p">().</span><span class="na">forEach</span><span class="p">(</span><span class="n">player</span> <span class="o">-&gt;</span> <span class="n">player</span><span class="p">.</span><span class="na">sendMessage</span><span class="p">(</span><span class="s">&quot;Hello!&quot;</span><span class="p">));</span>
+</code></pre></div>
+</td></tr></table></p>
+<h3 id="retrieving-a-player">Retrieving a player<a class="headerlink" href="#retrieving-a-player" title="Permanent link">&para;</a></h3>
+<h4 id="converting-a-platform-player-to-playerwrapper">Converting a platform player to PlayerWrapper<a class="headerlink" href="#converting-a-platform-player-to-playerwrapper" title="Permanent link">&para;</a></h4>
+<p>If you want to convert a platform player (e.g. Bukkit's <code>Player</code>) to <code>PlayerWrapper</code>, utilize the <code>PlayerWrapper PlayerMapper#wrapPlayer(Object)</code> method.
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">final</span> <span class="n">PlayerWrapper</span> <span class="n">player</span> <span class="o">=</span> <span class="n">PlayerMapper</span><span class="p">.</span><span class="na">wrapPlayer</span><span class="p">(</span><span class="n">platformPlayer</span><span class="p">);</span>
+<span class="n">player</span><span class="p">.</span><span class="na">sendMessage</span><span class="p">(</span><span class="s">&quot;Hello!&quot;</span><span class="p">);</span>
+</code></pre></div>
+</td></tr></table></p>
+<h4 id="converting-a-uuid-to-offlineplayerwrapper">Converting a UUID to OfflinePlayerWrapper<a class="headerlink" href="#converting-a-uuid-to-offlineplayerwrapper" title="Permanent link">&para;</a></h4>
+<p>If you want to convert a UUID to an OfflinePlayerWrapper, utilize the <code>OfflinePlayerWrapper PlayerMapper#wrapOfflinePlayer(Object)</code> method.
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">// will probably throw UnsupportedOperationException, since the random UUID doesn&#39;t belong to a player that has joined your server</span>
+<span class="kd">final</span> <span class="n">OfflinePlayerWrapper</span> <span class="n">player</span> <span class="o">=</span> <span class="n">PlayerMapper</span><span class="p">.</span><span class="na">wrapPlayer</span><span class="p">(</span><span class="n">UUID</span><span class="p">.</span><span class="na">randomUUID</span><span class="p">());</span>
+<span class="n">PlayerMapper</span><span class="p">.</span><span class="na">getConsoleSender</span><span class="p">().</span><span class="na">sendMessage</span><span class="p">(</span><span class="s">&quot;Is player online? &quot;</span> <span class="o">+</span> <span class="n">Boolean</span><span class="p">.</span><span class="na">toString</span><span class="p">(</span><span class="n">player</span><span class="p">.</span><span class="na">isOnline</span><span class="p">()));</span>
+</code></pre></div>
+</td></tr></table></p>
+<h4 id="converting-a-name-to-playerwrapper">Converting a name to PlayerWrapper<a class="headerlink" href="#converting-a-name-to-playerwrapper" title="Permanent link">&para;</a></h4>
+<p>If you want to convert a player's name to PlayerWrapper, utilize the <code>Optional&lt;PlayerWrapper&gt; PlayerMapper#getPlayer(String)</code> method.
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">final</span> <span class="n">Optional</span><span class="o">&lt;</span><span class="n">PlayerWrapper</span><span class="o">&gt;</span> <span class="n">player</span> <span class="o">=</span> <span class="n">PlayerMapper</span><span class="p">.</span><span class="na">getPlayer</span><span class="p">(</span><span class="s">&quot;Misat11&quot;</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">player</span><span class="p">.</span><span class="na">isPresent</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">player</span><span class="p">.</span><span class="na">orElseThrow</span><span class="p">().</span><span class="na">sendMessage</span><span class="p">(</span><span class="s">&quot;Hello misat!&quot;</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">PlayerMapper</span><span class="p">.</span><span class="na">getConsoleSender</span><span class="p">().</span><span class="na">sendMessage</span><span class="p">(</span><span class="s">&quot;Misat is not online!&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table></p>
                 
                   
                     
