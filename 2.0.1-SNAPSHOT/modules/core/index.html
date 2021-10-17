@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#core" class="md-skip">
+        <a href="#core-server" class="md-skip">
           Skip to content
         </a>
       
@@ -381,6 +381,26 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#instantiating" class="md-nav__link">
+    Instantiating
+  </a>
+  
+    <nav class="md-nav" aria-label="Instantiating">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#blocktypeholder-and-itemtypeholder" class="md-nav__link">
+    BlockTypeHolder and ItemTypeHolder
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#comparing" class="md-nav__link">
     Comparing
   </a>
@@ -389,8 +409,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#blocktypeholderitemtypeholder" class="md-nav__link">
-    BlockTypeHolder/ItemTypeHolder
+  <a href="#blocktypeholder-and-itemtypeholder_1" class="md-nav__link">
+    BlockTypeHolder and ItemTypeHolder
   </a>
   
 </li>
@@ -577,7 +597,7 @@
               
                 
                 
-                <h1 id="core">Core<a class="headerlink" href="#core" title="Permanent link">&para;</a></h1>
+                <h1 id="core-server">Core (server)<a class="headerlink" href="#core-server" title="Permanent link">&para;</a></h1>
 <p>Base module required for pretty much everything in SLib. Contains the base features for working with the server, such as the item API, block API, entities API and more. All other modules require this module to be present.</p>
 <h2 id="platform-support">Platform support<a class="headerlink" href="#platform-support" title="Permanent link">&para;</a></h2>
 <table>
@@ -832,9 +852,24 @@
 <p>ScreamingLib makes use of so-called Holders, platform unopinionated data holding classes.  </p>
 <p>Holders make use of Minecraft namespaced keys to stay platform independent.
 A very useful resource for getting Minecraft namespaced keys is Articdive's <a href="https://github.com/Articdive/ArticData">ArticData</a> repository.</p>
+<h3 id="instantiating">Instantiating<a class="headerlink" href="#instantiating" title="Permanent link">&para;</a></h3>
+<p>You can instantiate a holder with the <code>&lt;Anything&gt;Holder#of(Object)</code> method.</p>
+<h4 id="blocktypeholder-and-itemtypeholder">BlockTypeHolder and ItemTypeHolder<a class="headerlink" href="#blocktypeholder-and-itemtypeholder" title="Permanent link">&para;</a></h4>
+<p>For example, I'm going to create a holder holding the stone material.
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">final</span> <span class="n">BlockTypeHolder</span> <span class="n">block</span> <span class="o">=</span> <span class="n">BlockTypeHolder</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;minecraft:stone&quot;</span><span class="p">);</span>
+<span class="kd">final</span> <span class="n">ItemTypeHolder</span> <span class="n">item</span> <span class="o">=</span> <span class="n">ItemTypeHolder</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;minecraft:stone&quot;</span><span class="p">);</span>
+<span class="c1">// both are going to be STONE on bukkit</span>
+<span class="n">PlayerMapper</span><span class="p">.</span><span class="na">getConsoleSender</span><span class="p">().</span><span class="na">sendMessage</span><span class="p">(</span><span class="n">block</span><span class="p">.</span><span class="na">platformName</span><span class="p">());</span>
+<span class="n">PlayerMapper</span><span class="p">.</span><span class="na">getConsoleSender</span><span class="p">().</span><span class="na">sendMessage</span><span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="na">platformName</span><span class="p">());</span>
+</code></pre></div>
+</td></tr></table></p>
 <h3 id="comparing">Comparing<a class="headerlink" href="#comparing" title="Permanent link">&para;</a></h3>
 <p>You can compare a holder with the <code>&lt;Anything&gt;Holder#is(Object)</code> method.</p>
-<h4 id="blocktypeholderitemtypeholder">BlockTypeHolder/ItemTypeHolder<a class="headerlink" href="#blocktypeholderitemtypeholder" title="Permanent link">&para;</a></h4>
+<h4 id="blocktypeholder-and-itemtypeholder_1">BlockTypeHolder and ItemTypeHolder<a class="headerlink" href="#blocktypeholder-and-itemtypeholder_1" title="Permanent link">&para;</a></h4>
 <p>For example, I'm going to check if the material is stone, air or something else.
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -854,7 +889,6 @@ A very useful resource for getting Minecraft namespaced keys is Articdive's <a h
 <h2 id="services">Services<a class="headerlink" href="#services" title="Permanent link">&para;</a></h2>
 <p>Services are classes with the <code>@Service</code> annotation, specified in the <code>@Init</code> annotation on the main plugin class. They are initialized when the plugin starts to load.
 It is possible to retrieve the service class instances with the ServiceManager class (<code>ServiceManager#get(Class&lt;?&gt;)</code>).  </p>
-<p><strong>Example:</strong>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -897,7 +931,7 @@ It is possible to retrieve the service class instances with the ServiceManager c
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-</td></tr></table></p>
+</td></tr></table>
 <h3 id="annotations">Annotations<a class="headerlink" href="#annotations" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>@Service(dependsOn = {}, loadAfter = {})</code> - Marks the annotated class as a service. Service classes specified in the <code>dependsOn</code> field are loaded <em>before</em> initializing the annotated class, while service classes specified in the <code>loadAfter</code> field are loaded <em>after</em> initializing the annotated class.</li>
