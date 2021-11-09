@@ -515,7 +515,7 @@
 </ul>
 <div class="admonition info">
 <p class="admonition-title">Disclaimer</p>
-<p>These mappings are provided "AS-IS" with no warranty, so mistakes are possible. We are only solving issues in classes we are actively using in ScreamingSandals plugins. If you want to fix anything, feel free to open a pull request or contact us on our Discord server.
+<p>These mappings are provided "AS-IS" with no warranty, so mistakes are possible. We are only solving issues in classes, that we are actively using in ScreamingSandals plugins. If you want to fix anything, feel free to open a pull request or contact us on our Discord server.
 NMSMapper is made for servers! Many client-side mappings are missing.</p>
 </div>
 <div class="admonition warning">
@@ -599,17 +599,29 @@ NMSMapper is made for servers! Many client-side mappings are missing.</p>
 </code></pre></div>
 </td></tr></table>
 The generated code looks like this:
-  <code>``java
-public class RotationsAccessor {
-    public static Class&lt;?&gt; getType() {
-        return AccessorUtils.getType(RotationsAccessor.class, mapper -&gt; {
-            mapper.map("spigot", "1.9.4", "net.minecraft.server.${V}.Vector3f");
-            mapper.map("spigot", "1.17", "net.minecraft.core.Vector3f");
-            mapper.map("mcp", "1.9.4", "net.minecraft.util.math.Rotations");
-            mapper.map("mcp", "1.17", "net.minecraft.src.C_4709_");
-        });
-    }  
-}
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">RotationsAccessor</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">getType</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">AccessorUtils</span><span class="p">.</span><span class="na">getType</span><span class="p">(</span><span class="n">RotationsAccessor</span><span class="p">.</span><span class="na">class</span><span class="p">,</span> <span class="n">mapper</span> <span class="o">-&gt;</span> <span class="p">{</span>
+            <span class="n">mapper</span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="s">&quot;spigot&quot;</span><span class="p">,</span> <span class="s">&quot;1.9.4&quot;</span><span class="p">,</span> <span class="s">&quot;net.minecraft.server.${V}.Vector3f&quot;</span><span class="p">);</span>
+            <span class="n">mapper</span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="s">&quot;spigot&quot;</span><span class="p">,</span> <span class="s">&quot;1.17&quot;</span><span class="p">,</span> <span class="s">&quot;net.minecraft.core.Vector3f&quot;</span><span class="p">);</span>
+            <span class="n">mapper</span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="s">&quot;mcp&quot;</span><span class="p">,</span> <span class="s">&quot;1.9.4&quot;</span><span class="p">,</span> <span class="s">&quot;net.minecraft.util.math.Rotations&quot;</span><span class="p">);</span>
+            <span class="n">mapper</span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="s">&quot;mcp&quot;</span><span class="p">,</span> <span class="s">&quot;1.17&quot;</span><span class="p">,</span> <span class="s">&quot;net.minecraft.src.C_4709_&quot;</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">}</span>  
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+We can see that we got a new static method, named <code>getType()</code>, which returns a class based on the version and platform (Spigot and Forge is supported).</p>
+<p>Okay, we have a class. But classes are not all, we also need to access some fields, methods or even constructors.
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -621,26 +633,18 @@ public class RotationsAccessor {
 <span class="normal"> 9</span>
 <span class="normal">10</span>
 <span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>We can see that we got a new static method, named `getType()`, which returns a class based on the version and platform (Spigot and Forge is supported).
+<span class="normal">12</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">nmsGen</span> <span class="o">{</span>
+    <span class="cm">/* Setup, see chapter before */</span>
 
-Okay, we have a class. But classes are not all, we also need to access some fields, methods or even constructors.
-```groovy
-nmsGen {
-    /* Setup, see chapter before */
-
-    reqClass(&#39;net.minecraft.core.Rotations&#39;)
-        .reqConstructor(float, float, float)
-        .reqField(&#39;x&#39;)
-        .reqField(&#39;y&#39;)
-        .reqField(&#39;z&#39;)
-        .reqMethod(&#39;getX&#39;)
-        .reqMethod(&#39;getY&#39;)
-        .reqMethod(&#39;getZ&#39;)
-}
+    <span class="n">reqClass</span><span class="o">(</span><span class="s1">&#39;net.minecraft.core.Rotations&#39;</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">reqConstructor</span><span class="o">(</span><span class="kt">float</span><span class="o">,</span> <span class="kt">float</span><span class="o">,</span> <span class="kt">float</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">reqField</span><span class="o">(</span><span class="s1">&#39;x&#39;</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">reqField</span><span class="o">(</span><span class="s1">&#39;y&#39;</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">reqField</span><span class="o">(</span><span class="s1">&#39;z&#39;</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">reqMethod</span><span class="o">(</span><span class="s1">&#39;getX&#39;</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">reqMethod</span><span class="o">(</span><span class="s1">&#39;getY&#39;</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">reqMethod</span><span class="o">(</span><span class="s1">&#39;getZ&#39;</span><span class="o">)</span>
+<span class="o">}</span>
 </code></pre></div>
 </td></tr></table>
 This will generate access methods for one constructor, three fields and three methods.
@@ -695,9 +699,9 @@ This will generate access methods for one constructor, three fields and three me
 <span class="p">}</span>
 </code></pre></div>
 </td></tr></table>
-A generated access method for a field will always be called</code>getField<Name><code>and will always return</code>Field<code>.
-A generated access method for a constructor will always be called</code>getConstructor<Index><code>and will always return</code>Constructor&lt;?&gt;<code>. This index is generated from the specified order in</code>build.gradle<code>.  
-A generated access method for a method will always be called</code>getMethod<Name><Index><code>and will always return</code>Method`. Here the index is present, because multiple methods can have other parameters, but the same name.</p>
+A generated access method for a field will always be called <code>getField&lt;Name&gt;</code> and will always return <code>Field</code>.
+A generated access method for a constructor will always be called <code>getConstructor&lt;Index&gt;</code> and will always return <code>Constructor&lt;?&gt;</code>. This index is generated from the specified order in <code>build.gradle</code>.<br />
+A generated access method for a method will always be called <code>getMethod&lt;Name&gt;&lt;Index&gt;</code> and will always return <code>Method</code>. Here the index is present, because multiple methods can have other parameters, but the same name.</p>
 <div class="admonition note">
 <p class="admonition-title">Info</p>
 <p>If a class, a field, a method or a constructor is not found, <code>null</code> is returned.</p>
@@ -769,7 +773,7 @@ Available mapping types are <code>mojang, searge, spigot, obfuscated</code>, Moj
 <p class="admonition-title">Compatibility</p>
 <p>Versions lower than 1.9.4 are not supported and will not work!</p>
 </div>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>$ ./gradlew generateNmsConfig -PminecraftVersion=&lt;version&gt;
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>$ ./gradlew generateNmsConfig -PminecraftVersion<span class="o">=</span>&lt;version&gt;
 </code></pre></div>
 </td></tr></table>
                 
